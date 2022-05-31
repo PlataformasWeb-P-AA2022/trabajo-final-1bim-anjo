@@ -11,31 +11,34 @@ engine = create_engine(cadena_base_datos)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+# Todos los establecimientos que pertenecen al Código División Política Administrativa  Parroquia con valor 110553
 codParroquia = session.query(Establecimiento, Parroquia).join(Parroquia).filter(Parroquia.codigo == "110553").all()
 
-print("Consulta 1")
+print("_________Consulta 1_________")
 
 for r in codParroquia:
-	print(r)
+	print(r, ("\n"))
 #____________________________________________#
+# Todos los establecimientos de la provincia del Oro.
 proOro = session.query(Establecimiento, Provincia).join(Provincia).filter(Provincia.nombre == "Oro").all()
-
-print("Consulta 2")
+print("_________Consulta 2_________")
 
 for p in proOro:
-	print(p)
+	print(p("\n"))
         
 #____________________________________________#
+# Todos los establecimientos del cantón de Portovelo.
 canPortovelo = session.query(Establecimiento, Canton).join(Canton).filter(Canton.nombre == "Portovelo").all()
 
-print("Consulta 3")
+print("_________Consulta 3_________")
 
 for m in canPortovelo:
-	print(m)
+	print(m("\n"))
 #____________________________________________#
+# Todos los establecimientos del cantón de Zamora.
 canZamora = session.query(Establecimiento, Canton).join(Canton).filter(Canton.nombre == "Zamora").all()
 
-print("Consulta 4")
+print("_________Consulta 4_________")
 
 for n in canZamora:
-	print(n)
+	print(n("\n"))

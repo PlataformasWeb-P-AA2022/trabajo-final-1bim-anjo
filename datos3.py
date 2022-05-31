@@ -10,19 +10,23 @@ engine = create_engine(cadena_base_datos)
 
 Session = sessionmaker(bind=engine)
 session = Session()
-
-numPro =  session.query(Canton, Establecimiento).join(Establecimiento).filter(or_(Establecimiento.numDocentes == "0", Establecimiento.numDocentes == "5", Establecimiento.numDocentes == "11")).all()
-
-print("Consulta 1")
+# Los cantones que tiene establecimientos con 0 número de profesores, 5 profesores, 11, profesores
+numPro = session.query(Canton).join(Parroquia, Establecimiento).filter(
+     Establecimiento.numDocentes == 0 and
+     Establecimiento.numDocentes == 5 and 
+     Establecimiento.numDocentes == 11).all()
+print("_________Consulta 1_________")
 
 for n in numPro:
- print(n)
+ print(n,("\n"))
 
 #____________________________________________#
 
-parrPindal = session.query(Establecimiento, Parroquia).join(Parroquia).filter(and_(Establecimiento.numEstudiantes >= "21", Parroquia.nombre == "Pindal")).all()
-
-print("Consulta 2")
+# Los establecimientos que pertenecen a la parroquia Pindal con estudiantes mayores o iguales a 21
+parrPindal = session.query(Establecimiento).join(Parroquia).filter(and_
+    (Parroquia.nombre == "PINDAL",
+    Establecimiento.numEstudiantes >= 21)).all()
+print("_________Consulta 2_________")
 
 for e in parrPindal:
- print(e)
+ print(e,("\n"))
